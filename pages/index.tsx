@@ -5,6 +5,7 @@ import ProductsHomePage from "../components/ProductsHomePage";
 import { MainLayout } from "../layouts"
 import { getProducts, getSlug } from '../utils'
 import { Product } from '../types'
+import { SwitchDarkMode } from "../components/ui/SwitchDarkMode";
 
 interface Props {
   products: Product[]

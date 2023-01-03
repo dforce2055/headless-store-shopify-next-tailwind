@@ -41,7 +41,7 @@ const ProductsHomePage: FC<Props> = ({ products }) => {
   const maxLength = 65
 
   return (
-    <div className="bg-white">
+    <div className="bg-white dark:bg-white/10">
       <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
         <h2 id="products-heading" className="sr-only">
           Products
@@ -59,11 +59,11 @@ const ProductsHomePage: FC<Props> = ({ products }) => {
                   className="h-full w-full object-cover object-center group-hover:opacity-75 transition-opacity"
                 />
               </div>
-              <div className="mt-4 flex items-center justify-between text-base font-medium text-gray-900">
+              <div className="mt-4 flex items-center justify-between text-base font-medium text-gray-900 dark:text-gray-200">
                 <h3>{product.title}</h3>
                 <p>{fortmatPrice(product.price)}</p>
               </div>
-              <p className="mt-1 text-sm italic text-gray-500 ">
+              <p className="mt-1 text-sm italic text-gray-500 dark:text-gray-400">
                 {
                   product.description?.length >= maxLength
                     ? product.description?.slice(0, maxLength) + ' ...'

@@ -10,9 +10,9 @@ module.exports = {
     extend: {},
   },
   plugins: [
+    require('daisyui'),
     require('@tailwindcss/aspect-ratio'),
     require('@tailwindcss/forms'),
     require('@tailwindcss/typography'),
-    require('daisyui'),
   ],
 }
