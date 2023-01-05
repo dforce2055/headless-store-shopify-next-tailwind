@@ -1,4 +1,6 @@
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
 import { Popover, Transition } from '@headlessui/react'
 import {
   ArrowPathIcon,
@@ -16,9 +18,9 @@ import {
   ShoppingBagIcon
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
-import { SwitchDarkMode } from './ui/SwitchDarkMode'
-import Image from 'next/image'
+import { SwitchDarkMode } from './SwitchDarkMode'
 
+import { menuItems } from '../../_nav'
 
 const solutions = [
   {
@@ -82,7 +84,8 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function HeaderComponent() {
+export default function HeaderLanding() {
+  const [user, setUser] = useState(null)
   return (
     <Popover className="relative bg-white/30 dark:bg-white/10 z-10 shadow-sm">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 sticky top-0">
@@ -107,6 +110,7 @@ export default function HeaderComponent() {
               <Bars3Icon className="h-6 w-6" aria-hidden="true" />
             </Popover.Button>
           </div>
+          {/* Desktop menu */}
           <Popover.Group as="nav" className="hidden space-x-10 md:flex">
             <Popover className="relative">
               {({ open }) => (
@@ -172,16 +176,13 @@ export default function HeaderComponent() {
                 </>
               )}
             </Popover>
-
-            <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-200">
-              Pricing
-            </a>
-            <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-200">
-              Docs
-            </a>
-            <span className="text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-200">
-              Docs
-            </span>
+            {/* Navigation */}
+            <Link 
+              href="/products" 
+              className="text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-200"
+            >
+              Products
+            </Link>
 
             <Popover className="relative">
               {({ open }) => (
@@ -256,20 +257,27 @@ export default function HeaderComponent() {
             </Popover>
           </Popover.Group>
           <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-            <a href="#" className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
-              Sign in
-            </a>
-            <a
-              href="#"
-              className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-sky-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-sky-700"
-            >
-              Sign up
-            </a>
-            
+            {!user ? (
+              <>
+                <Link href="/login" className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
+                  Sign in
+                </Link>
+                <Link
+                  href="/register"
+                  className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-sky-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-sky-700"
+                >
+                  Sign up
+                </Link>
+              </>
+            ) : (
+                <>
+                  <span>Carrito</span>
+                </>
+            )}
           </div>
         </div>
       </div>
-
+      {/* Mobile menu */}
       <Transition
         as={Fragment}
         enter="duration-200 ease-out"
@@ -313,35 +321,34 @@ export default function HeaderComponent() {
             </div>
             <div className="space-y-6 py-6 px-5">
               <div className="grid grid-cols-2 gap-y-4 gap-x-8">
-                <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700 dark:text-gray-200">
+                <Link
+                  href="/products"
+                  className="text-base font-medium text-gray-900 hover:text-gray-700 dark:text-gray-200"
+                >
+                  Products
+                </Link>
+                <Link href="#" className="text-base font-medium text-gray-900 hover:text-gray-700 dark:text-gray-200">
                   Pricing
-                </a>
+                </Link>
 
-                <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700 dark:text-gray-200">
+                <Link href="#" className="text-base font-medium text-gray-900 hover:text-gray-700 dark:text-gray-200">
                   Docs
-                </a>
-                {resources.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="text-base font-medium text-gray-900 hover:text-gray-700 dark:text-gray-200"
-                  >
-                    {item.name}
-                  </a>
-                ))}
+                </Link>
+                
+                
               </div>
               <div>
-                <a
-                  href="#"
+                <Link
+                  href="/login"
                   className="flex w-full items-center justify-center rounded-md border border-transparent bg-sky-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-sky-700"
                 >
                   Sign up
-                </a>
+                </Link>
                 <p className="mt-6 text-center text-base font-medium text-gray-500">
                   Existing customer?{' '}
-                  <a href="#" className="text-sky-600 hover:text-sky-500">
+                  <Link href="/register" className="text-sky-600 hover:text-sky-500">
                     Sign in
-                  </a>
+                  </Link>
                 </p>
               </div>
             </div>

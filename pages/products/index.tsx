@@ -1,28 +1,34 @@
 import { useState } from "react";
 import { NextPage, GetStaticProps } from 'next'
-import HeroComponent from "../components/HeroComponent";
-import ProductsHomePage from "../components/ProductsHomePage";
-import { LandingLayout } from "../layouts"
-import { getProducts, getSlug } from '../utils'
-import { Product } from '../types'
-import { SwitchDarkMode } from "../components/ui/SwitchDarkMode";
+import { ProductsLayout } from "../../layouts"
+import { getProducts, getSlug } from '../../utils'
+import { Product } from '../../types'
+import ProductsHomePage from "../../components/ProductsHomePage";
+import OTPForm from "../../components/ui/OTPForm";
 
 interface Props {
   products: Product[]
 }
 
 
-const HomePage: NextPage<Props> = ({ products }) => {
+const ProductsPage: NextPage<Props> = ({ products }) => {
   const [isChecked, setIsChecked] = useState(false)
+  const [otp, setOtp] = useState('');
+
+  const onChange = (value: string) => setOtp(value);
 
   const handleOnChange = () => {
     setIsChecked(!isChecked);
   };
   return (
-    <LandingLayout title="Home">
-      <HeroComponent />
+    <ProductsLayout title="Products">
       <ProductsHomePage products={products} />
-    </LandingLayout>
+      <OTPForm
+        value={otp}
+        valueLength={6}
+        onChange={onChange}
+      />
+    </ProductsLayout>
   )
 }
 
@@ -61,4 +67,4 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 }
 
-export default HomePage
+export default ProductsPage

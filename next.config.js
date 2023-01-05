@@ -14,8 +14,25 @@ const nextConfig = {
         hostname: 'fakestoreapi.com',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        port: '',
+      },
+      {
+        protocol: 'https',
+        hostname: 'countryflagsapi.com',
+        port: '',
+      },
     ],
   },
+  domains: [
+    'tailwindui.com',
+    'cli.vuejs.org',
+    'images.unsplash.com',
+    'countryflagsapi.com',
+  ], // dominios de donde voy a cargar imagenes en el build static
+  formats: ['image/avif', 'image/webp'],
 }
 
 

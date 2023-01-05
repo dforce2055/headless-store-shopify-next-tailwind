@@ -31,12 +31,12 @@ class MyDocument extends Document {
       <Html
         lang="en"
         data-theme="light"
-        className="light"
+        className="light h-full"
       >
         <Head />
         <body
           className="
-          bg-white text-gray-500
+          bg-white text-gray-500 h-full
           dark:bg-gradient-to-br dark:from-gray-800 dark:to-slate-900 dark:text-gray-200"
         >
           <Main />
